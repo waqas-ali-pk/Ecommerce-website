@@ -8,7 +8,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=30, blank=True)
-    user_type = models.IntegerField(max_length=1, blank=True)  # 1 = admin, 2 = seller, 3 = buyer
+    user_type = models.IntegerField(blank=True, default=0)  # 1 = admin, 2 = seller, 3 = buyer
     birth_date = models.DateField(null=True, blank=True)
 
 

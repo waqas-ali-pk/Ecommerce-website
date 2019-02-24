@@ -28,6 +28,6 @@ class Product(models.Model):
     product_name = models.CharField(max_length=70, blank=True)
     product_description = models.CharField(max_length=200, blank=True)
     created_on = models.DateField(blank=False)
-    created_user_id = models.IntegerField(black=False)
+    created_user_id = models.IntegerField(blank=False)
     modified_on = models.DateField(blank=True)
     modified_user_id = models.IntegerField(blank=True)
