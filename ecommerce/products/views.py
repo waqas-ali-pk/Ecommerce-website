@@ -14,10 +14,12 @@ class ProductCategoryDetail(DetailView):
 
 class ProductCategoryCreate(CreateView):
     model = ProductCategory
+    fields = '__all__'
 
 
 class ProductCategoryUpdate(UpdateView):
     model = ProductCategory
+    fields = '__all__'
 
 
 class ProductCategoryDelete(DeleteView):

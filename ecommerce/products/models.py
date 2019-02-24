@@ -6,9 +6,12 @@ class ProductCategory(models.Model):
     category_name = models.CharField(max_length=50, blank=True)
     category_description = models.CharField(max_length=100, blank=True)
     create_on = models.DateField(blank=False)
-    created_user_id = models.DateField(blank=False)
+    created_user_id = models.IntegerField(blank=False)
     modified_on = models.DateField(blank=True)
     modified_user_id = models.IntegerField(blank=True)
+
+    def get_absolute_url(self):
+        return u'/products/productcategory/%d' % self.product_category_id
 
 
 class ProductSubCategory(models.Model):
@@ -16,7 +19,7 @@ class ProductSubCategory(models.Model):
     sub_category_name = models.CharField(max_length=50, blank=True)
     sub_category_description = models.CharField(max_length=100, blank=True)
     create_on = models.DateField(blank=False)
-    created_user_id = models.DateField(blank=False)
+    created_user_id = models.IntegerField(blank=False)
     modified_on = models.DateField(blank=True)
     modified_user_id = models.IntegerField(blank=True)
 
