@@ -23,6 +23,9 @@ class ProductSubCategory(models.Model):
     modified_on = models.DateField(blank=True)
     modified_user_id = models.IntegerField(blank=True)
 
+    def get_absolute_url(self):
+        return u'/products/productsubcategory/%d' % self.product_sub_category_id
+
 
 class Product(models.Model):
     product_id = models.IntegerField(blank=False, primary_key=True)

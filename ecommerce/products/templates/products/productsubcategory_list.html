@@ -1,0 +1,27 @@
+<h1>Sub Categories</h1>
+
+<table>
+<thead>
+<tr>
+<th>SubCategoryName</th>
+<th>Description</th>
+<th>CreatedOn</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+{% for productsubcategory in object_list %}
+<tr>
+<td>{{ productsubcategory.sub_category_name }}</td>
+<td>{{ productsubcategory.sub_category_description }}</td>
+<td>{{ productsubcategory.create_on }}</td>
+<td>
+<a  href="{% url 'productsubcategory_detail'  productsubcategory.product_sub_category_id  %}">details</a>
+<a  href="{% url 'productsubcategory_update'  productsubcategory.product_sub_category_id  %}">edit</a>
+<a  href="{% url 'productsubcategory_delete'  productsubcategory.product_sub_category_id  %}">delete</a>
+</td>
+</tr>
+
+{% endfor %}
+</tbody>
+</table>

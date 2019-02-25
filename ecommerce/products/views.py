@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import ProductCategory
+from .models import ProductCategory, ProductSubCategory
 
 
 class ProductCategoryList(ListView):
@@ -24,3 +24,25 @@ class ProductCategoryUpdate(UpdateView):
 
 class ProductCategoryDelete(DeleteView):
     model = ProductCategory
+
+
+class ProductSubCategoryList(ListView):
+    model = ProductSubCategory
+
+
+class ProductSubCategoryDetail(DetailView):
+    model = ProductSubCategory
+
+
+class ProductSubCategoryCreate(CreateView):
+    model = ProductSubCategory
+    fields = '__all__'
+
+
+class ProductSubCategoryUpdate(UpdateView):
+    model = ProductSubCategory
+    fields = '__all__'
+
+
+class ProductSubCategoryDelete(DeleteView):
+    model = ProductSubCategory
