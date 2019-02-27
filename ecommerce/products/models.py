@@ -37,3 +37,6 @@ class Product(models.Model):
     created_user_id = models.IntegerField(blank=False)
     modified_on = models.DateField(blank=True)
     modified_user_id = models.IntegerField(blank=True)
+
+    def get_absolute_url(self):
+        return u'/products/product/%d' % self.product_id
