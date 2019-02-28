@@ -19,4 +19,11 @@ urlpatterns = [
     url(r'productsubcategory_delete/(?P<pk>[0-9]+)/$', views.ProductSubCategoryDelete.as_view(
         success_url='/products/productsubcategories/'), name='productsubcategory_delete'),
 
+    url(r'products/$', views.ProductList.as_view(), name='product_list'),
+    url(r'product/(?P<pk>[0-9]+)/$', views.ProductDetail.as_view(), name='product_detail'),
+    url(r'product_create/$', views.ProductCreate.as_view(), name='product_create'),
+    url(r'product_update/(?P<pk>[0-9]+)/$', views.ProductUpdate.as_view(), name='product_update'),
+    url(r'product_delete/(?P<pk>[0-9]+)/$', views.ProductDelete.as_view(
+        success_url='/products/products/'), name='product_delete'),
+
 ]

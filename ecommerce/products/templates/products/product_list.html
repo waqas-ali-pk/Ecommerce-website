@@ -1,0 +1,27 @@
+<h1>Products</h1>
+
+<table>
+<thead>
+<tr>
+<th>ProductName</th>
+<th>Description</th>
+<th>CreatedOn</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+{% for product in object_list %}
+<tr>
+<td>{{ product.product_name }}</td>
+<td>{{ product.product_description }}</td>
+<td>{{ product.created_on }}</td>
+<td>
+<a  href="{% url 'product_detail'  product.product_id  %}">details</a>
+<a  href="{% url 'product_update'  product.product_id  %}">edit</a>
+<a  href="{% url 'product_delete'  product.product_id  %}">delete</a>
+</td>
+</tr>
+
+{% endfor %}
+</tbody>
+</table>
