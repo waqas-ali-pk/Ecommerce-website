@@ -40,6 +40,8 @@ class Product(models.Model):
     product_sub_category_id = models.ForeignKey(ProductSubCategory)
     product_name = models.CharField(max_length=70, blank=True)
     product_description = models.CharField(max_length=200, blank=True)
+    p_price = models.DecimalField(blank=False, max_digits=11, decimal_places=2)
+    s_price = models.DecimalField(blank=False, max_digits=11, decimal_places=2)
     created_on = models.DateField(blank=False)
     created_user_id = models.IntegerField(blank=False)
     modified_on = models.DateField(null=True, blank=True)
@@ -50,3 +52,23 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return u'/products/product/%d' % self.product_id
+
+
+class CustomAttributes(models.Model):
+    attribute_id = models.IntegerField(blank=False, primary_key=True)
+    attribute_name = models.CharField(max_length=50, blank=False)
+    created_on = models.DateField(blank=False)
+    created_user_id = models.IntegerField(blank=False)
+    modified_on = models.DateField(null=True, blank=True)
+    modified_user_id = models.IntegerField(null=True, blank=True)
+
+
+class ProductAttributes(models.Model):
+    product_attribute_id = models.IntegerField(blank=False, primary_key=True)
+    attribute_id = models.ForeignKey(CustomAttributes)
+    product_id = models.ForeignKey(Product)
+    attribute_value = models.CharField(max_length=200, blank=False)
+    created_on = models.DateField(blank=False)
+    created_user_id = models.IntegerField(blank=False)
+    modified_on = models.DateField(null=True, blank=True)
+    modified_user_id = models.IntegerField(null=True, blank=True)
