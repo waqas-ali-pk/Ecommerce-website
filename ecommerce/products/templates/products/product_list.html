@@ -1,12 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Products
+{% endblock %}
+
+{% block content %}
+
 <h1>Products</h1>
 
-<table>
+<table class="table table-striped">
 <thead>
 <tr>
-<th>ProductName</th>
-<th>Description</th>
-<th>CreatedOn</th>
-<th>Actions</th>
+<th scope="col">ProductName</th>
+<th scope="col">Description</th>
+<th scope="col">CreatedOn</th>
+<th scope="col">Actions</th>
 </tr>
 </thead>
 <tbody>
@@ -25,3 +33,5 @@
 {% endfor %}
 </tbody>
 </table>
+
+{% endblock %}
