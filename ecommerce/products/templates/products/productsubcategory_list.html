@@ -1,12 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Sub Categories
+{% endblock %}
+
+{% block content %}
 <h1>Sub Categories</h1>
 
-<table>
+<table class="table table-striped">
 <thead>
 <tr>
-<th>SubCategoryName</th>
-<th>Description</th>
-<th>CreatedOn</th>
-<th>Actions</th>
+<th scope="col">Sub Category Name</th>
+<th scope="col">Description</th>
+<th scope="col">CreatedOn</th>
+<th scope="col">Actions</th>
 </tr>
 </thead>
 <tbody>
@@ -25,3 +32,4 @@
 {% endfor %}
 </tbody>
 </table>
+{% endblock %}

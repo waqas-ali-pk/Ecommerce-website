@@ -1,5 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Sub Categories Details
+{% endblock %}
+
+{% block content %}
 <h1>ProductSubCategory Details</h1>
 
 <p>Name: {{object.sub_category_name}}</p>
 <p>Description: {{object.sub_category_description}}</p>
 <p>CreatedOn: {{object.created_on}}</p>
+{% endblock %}
