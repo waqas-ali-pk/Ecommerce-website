@@ -2,11 +2,13 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from signup.forms import SignUpForm
+from products.models import Product
 
 
 # @login_required
 def home(request):
-    return render(request, 'home.html')
+    allProducts = Product.objects.all()
+    return render(request, 'home.html', {'allProducts':allProducts})
 
 
 def signup(request):
