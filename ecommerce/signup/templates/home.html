@@ -9,18 +9,27 @@ ecommerce home page
 
 <div class="container">
 
-    <div class="d-flex flex-row">
-{% for product in allProducts %}
-<div class="p-2">
+    <!--<div class="d-flex flex-row">-->
+        <div class="row">
 
-    <div class="card card-body" style="width: 15rem;">
+{% for product in allProducts %}
+
+        <div class="col-md-6 col-lg-4">
+<!--<div class="p-2">-->
+
+            <!--<div class="portfolio-item d-block mx-auto">-->
+
+    <div class="card card-body">
+
 <h4 class="card-title">{{ product.product_name }}</h4>
-<span class="badge badge-primary">{{ product.s_price }}</span>
+<span class="badge badge-primary">${{ product.s_price }}</span>
         <p class="card-text">{{ product.product_description }}</p>
 <a href="#" class="btn btn-primary">More</a>
+            </div>
 
-</div>
+<!--</div>-->
 
+<!--</div>-->
 
     </div>
 
