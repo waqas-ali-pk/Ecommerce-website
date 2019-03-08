@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class ProductCategory(models.Model):
@@ -68,6 +69,28 @@ class ProductAttributes(models.Model):
     attribute_id = models.ForeignKey(CustomAttributes)
     product_id = models.ForeignKey(Product)
     attribute_value = models.CharField(max_length=200, blank=False)
+    created_on = models.DateField(blank=False)
+    created_user_id = models.IntegerField(blank=False)
+    modified_on = models.DateField(null=True, blank=True)
+    modified_user_id = models.IntegerField(null=True, blank=True)
+
+
+class ProductReview(models.Model):
+    product_review_id = models.IntegerField(blank=False, primary_key=True)
+    product_id = models.ForeignKey(Product)
+    user_id = models.ForeignKey(User)
+    review_value = models.CharField(max_length=10, blank=False)
+    review_comment = models.CharField(max_length=200, blank=False)
+    created_on = models.DateField(blank=False)
+    created_user_id = models.IntegerField(blank=False)
+    modified_on = models.DateField(null=True, blank=True)
+    modified_user_id = models.IntegerField(null=True, blank=True)
+
+
+class PaymentMethods(models.Model):
+    payment_method_id = models.IntegerField(blank=False, primary_key=True)
+    payment_method_name = models.CharField(max_length=50, blank=False)
+    description = models.CharField(max_length=200, blank=False)
     created_on = models.DateField(blank=False)
     created_user_id = models.IntegerField(blank=False)
     modified_on = models.DateField(null=True, blank=True)
