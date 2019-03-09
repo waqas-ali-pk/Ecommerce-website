@@ -26,6 +26,13 @@ class ProductCategoryDelete(DeleteView):
     model = ProductCategory
 
 
+def search_product_category(request, product_category_id):
+    all_products = Product.objects.filter(product_category_id=product_category_id)
+    pc = ProductCategory.objects.get(product_category_id=product_category_id)
+    page_title = pc.category_name
+    return render(request, 'search_product_categories.html', {'allProducts':all_products, 'page_title':page_title})
+
+
 class ProductSubCategoryList(ListView):
     model = ProductSubCategory
 
