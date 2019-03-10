@@ -34,7 +34,16 @@
                     <ul class="navbar-nav ml-auto">
 
                 {% if user.is_authenticated %}
-                <li class="nav-item">
+                        <li class="nav-item">
+                    <a class="nav-link" href="{% url 'product_create' %}">Add Product</a>
+                    </li>
+                        <li class="nav-item">
+                    <a class="nav-link" href="{% url 'productcategory_create' %}">Add Category</a>
+                    </li>
+                        <li class="nav-item">
+                    <a class="nav-link" href="{% url 'productsubcategory_create' %}">Add Subcategory</a>
+                    </li>
+                        <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">logout</a>
                     </li>
                 {% else %}
