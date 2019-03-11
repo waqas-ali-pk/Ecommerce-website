@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous">
+          rel="stylesheet">
     <title>{% block title %}Ecommerce Website{% endblock %}</title>
 </head>
 <body>
@@ -19,41 +19,42 @@
                     <ul class="navbar-nav">
 
                         <li class="nav-item active">
-                      <a class="nav-link" href="{% url 'home' %}">Home</a>
-                    </li>
+                            <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        </li>
                         {% for page in pages_menu %}
 
-                    <li class="nav-item">
-                      <a class="nav-link" href="{% url 'search-product-categories' product_category_id=page.product_category_id %}">{{page.menu_title}}</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="{% url 'search-product-categories' product_category_id=page.product_category_id %}">{{page.menu_title}}</a>
+                        </li>
 
-                    {% endfor %}
+                        {% endfor %}
 
                     </ul>
 
                     <ul class="navbar-nav ml-auto">
 
-                {% if user.is_authenticated %}
+                        {% if user.is_authenticated %}
                         <li class="nav-item">
-                    <a class="nav-link" href="{% url 'product_create' %}">Add Product</a>
-                    </li>
+                            <a class="nav-link" href="{% url 'product_create' %}">Add Product</a>
+                        </li>
                         <li class="nav-item">
-                    <a class="nav-link" href="{% url 'productcategory_create' %}">Add Category</a>
-                    </li>
+                            <a class="nav-link" href="{% url 'productcategory_create' %}">Add Category</a>
+                        </li>
                         <li class="nav-item">
-                    <a class="nav-link" href="{% url 'productsubcategory_create' %}">Add Subcategory</a>
-                    </li>
+                            <a class="nav-link" href="{% url 'productsubcategory_create' %}">Add Subcategory</a>
+                        </li>
                         <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">logout</a>
-                    </li>
-                {% else %}
+                            <a class="nav-link" href="{% url 'logout' %}">logout</a>
+                        </li>
+                        {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'login' %}">login</a>
-                    </li>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'signup' %}">signup</a>
-                            </li>
-                {% endif %}
+                        </li>
+                        {% endif %}
 
 
                     </ul>

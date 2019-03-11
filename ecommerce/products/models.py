@@ -41,6 +41,7 @@ class Product(models.Model):
     product_sub_category_id = models.ForeignKey(ProductSubCategory)
     product_name = models.CharField(max_length=70, blank=True)
     product_description = models.CharField(max_length=200, blank=True)
+    product_image = models.ImageField(upload_to='product_image', blank=True)
     p_price = models.DecimalField(blank=False, max_digits=11, decimal_places=2)
     s_price = models.DecimalField(blank=False, max_digits=11, decimal_places=2)
     created_on = models.DateField(blank=False)
