@@ -15,6 +15,12 @@
     <div class="card card-body">
 
 <h4 class="card-title">{{ product.product_name }}</h4>
+        <p>
+            {% if product.product_image %}
+            <img src="{{product.product_image.url}}" width="240"></p>
+{% endif %}
+        </p>
+
 <span class="badge badge-primary">${{ product.s_price }}</span>
         <p class="card-text">{{ product.product_description }}</p>
 <a href="#" class="btn btn-primary">More</a>
