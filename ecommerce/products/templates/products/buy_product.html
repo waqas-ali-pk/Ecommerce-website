@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{product.product_name}}
+{% endblock %}
+
+{% block content %}
+<h1>{{product.product_name}}</h1>
+
+<p>
+            {% if product.product_image %}
+    <img src="{{product.product_image.url}}" width="240"></p>
+{% endif %}
+        </p>
+<p><span class="badge badge-primary">${{ product.s_price }}</span></p>
+<p>{{product.product_description}}</p>
+
+{% endblock %}
