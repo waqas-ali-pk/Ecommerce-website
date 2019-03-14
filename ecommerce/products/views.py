@@ -75,3 +75,8 @@ class ProductUpdate(UpdateView):
 
 class ProductDelete(DeleteView):
     model = Product
+
+
+def buy_product_detail(request, product_id):
+    product = Product.objects.get(product_id=product_id)
+    return render(request, 'products/buy_product_detail.html', {'product': product})

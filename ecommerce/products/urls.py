@@ -29,4 +29,7 @@ urlpatterns = [
     url(r'product_delete/(?P<pk>[0-9]+)/$', views.ProductDelete.as_view(
         success_url='/products/products/'), name='product_delete'),
 
+    url(r'buy_product_detail/(?P<product_id>[0-9]+)/$', views.buy_product_detail,
+        name='buy_product_detail'),
+
 ]

@@ -31,7 +31,7 @@ ecommerce home page
         <h4 class="card-title">{{ product.product_name }}</h4>
 <p><span class="badge badge-primary">${{ product.s_price }}</span></p>
         <!--<p class="card-text">{{ product.product_description }}</p>-->
-<a href="#" class="btn btn-primary float-right">More</a>
+<a href="{% url 'buy_product_detail' product_id=product.product_id %}" class="btn btn-primary float-right">More</a>
             </div>
                 </div>
 
