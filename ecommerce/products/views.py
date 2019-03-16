@@ -1,7 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import ProductCategory, ProductSubCategory, Product
+from .models import ProductCategory, ProductSubCategory, Product, ProductReview
+from .forms import ProductReviewCreateForm
+from django.http import HttpResponseRedirect
 
 
 class ProductCategoryList(ListView):
@@ -79,4 +83,20 @@ class ProductDelete(DeleteView):
 
 def buy_product_detail(request, product_id):
     product = Product.objects.get(product_id=product_id)
-    return render(request, 'products/buy_product_detail.html', {'product': product})
+    product_reviews = ProductReview.objects.filter(product_id=product_id)
+    return render(request, 'products/buy_product_detail.html',
+                  {'product': product, 'product_reviews': product_reviews})
+
+
+class ProductReviewCreate(CreateView):
+    def get(self, request, *args, **kwargs):
+        context = {'form': ProductReviewCreateForm()}
+        return render(request, 'products/add_product_review.html', context)
+
+    def post(self, request, *args, **kwargs):
+        form = ProductReviewCreateForm(request.POST)
+        if form.is_valid():
+            review = form.save()
+            review.save()
+            return HttpResponseRedirect(reverse_lazy('buy_product_detail', args=[review.product_id.product_id]))
+        return render(request, 'products/add_product_review.html', {'form': form})
