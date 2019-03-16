@@ -20,7 +20,7 @@ class ProductCategory(models.Model):
 
 class ProductSubCategory(models.Model):
     product_sub_category_id = models.IntegerField(blank=False, primary_key=True)
-    product_category_id = models.ForeignKey(ProductCategory)
+    product_category = models.ForeignKey(ProductCategory)
     sub_category_name = models.CharField(max_length=50, blank=True)
     sub_category_description = models.CharField(max_length=100, blank=True)
     created_on = models.DateField(blank=False)
@@ -37,8 +37,8 @@ class ProductSubCategory(models.Model):
 
 class Product(models.Model):
     product_id = models.IntegerField(blank=False, primary_key=True)
-    product_category_id = models.ForeignKey(ProductCategory)
-    product_sub_category_id = models.ForeignKey(ProductSubCategory)
+    product_category = models.ForeignKey(ProductCategory)
+    product_sub_category = models.ForeignKey(ProductSubCategory)
     product_name = models.CharField(max_length=70, blank=True)
     product_description = models.CharField(max_length=200, blank=True)
     product_image = models.ImageField(upload_to='product_image', blank=True)
@@ -78,8 +78,7 @@ class ProductAttributes(models.Model):
 
 class ProductReview(models.Model):
     product_review_id = models.IntegerField(blank=False, primary_key=True)
-    product_id = models.ForeignKey(Product)
-    user_id = models.ForeignKey(User)
+    product = models.ForeignKey(Product)
     review_value = models.CharField(max_length=10, blank=False)
     review_comment = models.CharField(max_length=200, blank=False)
     created_on = models.DateField(blank=False)

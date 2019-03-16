@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'buy_product_detail/(?P<product_id>[0-9]+)/$', views.buy_product_detail,
         name='buy_product_detail'),
 
-    url(r'productreview_create/$', views.ProductReviewCreate.as_view(), name='productreview_create'),
+    url(r'productreview_create/(?P<product_id>[0-9]+)/$', views.ProductReviewCreate.as_view(),
+        name='productreview_create'),
 
 ]

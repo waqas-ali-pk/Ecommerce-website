@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import ProductCategory, ProductSubCategory, Product, ProductReview
@@ -89,14 +90,27 @@ def buy_product_detail(request, product_id):
 
 
 class ProductReviewCreate(CreateView):
-    def get(self, request, *args, **kwargs):
-        context = {'form': ProductReviewCreateForm()}
-        return render(request, 'products/add_product_review.html', context)
+    template_name = 'products/add_product_review.html'
+    form_class = ProductReviewCreateForm
 
-    def post(self, request, *args, **kwargs):
-        form = ProductReviewCreateForm(request.POST)
-        if form.is_valid():
-            review = form.save()
-            review.save()
-            return HttpResponseRedirect(reverse_lazy('buy_product_detail', args=[review.product_id.product_id]))
-        return render(request, 'products/add_product_review.html', {'form': form})
+    def form_valid(self, form):
+        form.instance.product = Product.objects.get(product_id=self.kwargs['product_id'])
+        review = form.save()
+        review.save()
+        return HttpResponseRedirect(reverse_lazy('buy_product_detail', args=[review.product.product_id]))
+
+    #
+    # def get_success_url(self):
+    #     return reverse('buy_product_detail', kwargs={'product_id': self.object.product_id.product_id})
+    #
+    # def get(self, request, *args, **kwargs):
+    #     context = {'form': ProductReviewCreateForm()}
+    #     return render(request, 'products/add_product_review.html', context)
+    #
+    # def post(self, request, *args, **kwargs):
+    #     form = ProductReviewCreateForm(request.POST)
+    #     if form.is_valid():
+    #         review = form.save()
+    #         review.save()
+    #         return HttpResponseRedirect(reverse_lazy('buy_product_detail', args=[review.product_id.product_id]))
+    #     return render(request, 'products/add_product_review.html', {'form': form})
