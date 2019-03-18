@@ -1,4 +1,6 @@
 from django.conf.urls import url
+from django.contrib.auth.decorators import login_required
+
 from . import views
 
 urlpatterns = [
@@ -32,7 +34,7 @@ urlpatterns = [
     url(r'buy_product_detail/(?P<product_id>[0-9]+)/$', views.buy_product_detail,
         name='buy_product_detail'),
 
-    url(r'productreview_create/(?P<product_id>[0-9]+)/$', views.ProductReviewCreate.as_view(),
+    url(r'productreview_create/(?P<product_id>[0-9]+)/$', login_required(views.ProductReviewCreate.as_view()),
         name='productreview_create'),
 
 ]

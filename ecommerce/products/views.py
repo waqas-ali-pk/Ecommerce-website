@@ -5,8 +5,9 @@ from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import ProductCategory, ProductSubCategory, Product, ProductReview
-from .forms import ProductReviewCreateForm
+from .forms import ProductReviewCreateForm, ProductCreateForm, ProductUpdateForm
 from django.http import HttpResponseRedirect
+import datetime
 
 
 class ProductCategoryList(ListView):
@@ -69,13 +70,30 @@ class ProductDetail(DetailView):
 
 
 class ProductCreate(CreateView):
-    model = Product
-    fields = '__all__'
+    template_name = 'products/product_form.html'
+    form_class = ProductCreateForm
+
+    def form_valid(self, form):
+        form.instance.created_on = datetime.datetime.now()
+        form.instance.created_user_id = self.request.user.id
+        product = form.save()
+        product.save()
+        return HttpResponseRedirect(product.get_absolute_url())
 
 
 class ProductUpdate(UpdateView):
     model = Product
-    fields = '__all__'
+    template_name = 'products/product_form.html'
+    form_class = ProductUpdateForm
+
+    def form_valid(self, form):
+        product = form.save()
+        product.modified_on = datetime.datetime.now()
+        product.modified_user_id = self.request.user.id
+        product.save()
+
+        print(product)
+        return HttpResponseRedirect(product.get_absolute_url())
 
 
 class ProductDelete(DeleteView):
@@ -95,6 +113,8 @@ class ProductReviewCreate(CreateView):
 
     def form_valid(self, form):
         form.instance.product = Product.objects.get(product_id=self.kwargs['product_id'])
+        form.instance.created_on = datetime.datetime.now()
+        form.instance.created_user_id = self.request.user.id
         review = form.save()
         review.save()
         return HttpResponseRedirect(reverse_lazy('buy_product_detail', args=[review.product.product_id]))
