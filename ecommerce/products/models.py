@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class ProductCategory(models.Model):
-    product_category_id = models.IntegerField(blank=False, primary_key=True)
+    product_category_id = models.BigAutoField(primary_key=True)
     category_name = models.CharField(max_length=50, blank=True)
     category_description = models.CharField(max_length=100, blank=True)
     created_on = models.DateField(blank=False)
@@ -19,7 +19,7 @@ class ProductCategory(models.Model):
 
 
 class ProductSubCategory(models.Model):
-    product_sub_category_id = models.IntegerField(blank=False, primary_key=True)
+    product_sub_category_id = models.BigAutoField(primary_key=True)
     product_category = models.ForeignKey(ProductCategory)
     sub_category_name = models.CharField(max_length=50, blank=True)
     sub_category_description = models.CharField(max_length=100, blank=True)
@@ -36,7 +36,7 @@ class ProductSubCategory(models.Model):
 
 
 class Product(models.Model):
-    product_id = models.IntegerField(blank=False, primary_key=True)
+    product_id = models.BigAutoField(primary_key=True)
     product_category = models.ForeignKey(ProductCategory)
     product_sub_category = models.ForeignKey(ProductSubCategory)
     product_name = models.CharField(max_length=70, blank=True)
@@ -57,7 +57,7 @@ class Product(models.Model):
 
 
 class CustomAttributes(models.Model):
-    attribute_id = models.IntegerField(blank=False, primary_key=True)
+    attribute_id = models.BigAutoField(primary_key=True)
     attribute_name = models.CharField(max_length=50, blank=False)
     created_on = models.DateField(blank=False)
     created_user_id = models.IntegerField(blank=False)
@@ -66,7 +66,7 @@ class CustomAttributes(models.Model):
 
 
 class ProductAttributes(models.Model):
-    product_attribute_id = models.IntegerField(blank=False, primary_key=True)
+    product_attribute_id = models.BigAutoField(primary_key=True)
     attribute_id = models.ForeignKey(CustomAttributes)
     product_id = models.ForeignKey(Product)
     attribute_value = models.CharField(max_length=200, blank=False)
@@ -77,7 +77,7 @@ class ProductAttributes(models.Model):
 
 
 class ProductReview(models.Model):
-    product_review_id = models.IntegerField(blank=False, primary_key=True)
+    product_review_id = models.BigAutoField(primary_key=True)
     product = models.ForeignKey(Product)
     review_value = models.CharField(max_length=10, blank=False)
     review_comment = models.CharField(max_length=200, blank=False)
@@ -88,7 +88,7 @@ class ProductReview(models.Model):
 
 
 class PaymentMethods(models.Model):
-    payment_method_id = models.IntegerField(blank=False, primary_key=True)
+    payment_method_id = models.BigAutoField(primary_key=True)
     payment_method_name = models.CharField(max_length=50, blank=False)
     description = models.CharField(max_length=200, blank=False)
     created_on = models.DateField(blank=False)

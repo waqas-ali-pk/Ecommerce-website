@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block content %}
-<h1>{{product.product_name}}</h1>
-
+<h2>{{product.product_name}}</h2>
+<p>Added on: {{product.created_on}}</p>
 <p>
             {% if product.product_image %}
     <img src="{{product.product_image.url}}" width="240"></p>
@@ -21,7 +21,11 @@
 <h1> Reviews:</h1>
 
 {% for review in product_reviews %}
-<p>{{ review.review_comment }}</p>
+<p>
+    <small class="text-muted">Date: {{review.created_on}}</small>
+    <br/>{{ review.review_comment }}
+    <hr />
+</p>
 {% endfor %}
 
 <br />

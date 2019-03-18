@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Sub Categories Details
+{{object.sub_category_name}} Details
 {% endblock %}
 
 {% block content %}
-<h1>ProductSubCategory Details</h1>
+<h2>Product Sub Category Details</h2>
 
 <p>Name: {{object.sub_category_name}}</p>
 <p>Description: {{object.sub_category_description}}</p>

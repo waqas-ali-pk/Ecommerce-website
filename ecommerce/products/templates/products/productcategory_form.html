@@ -2,15 +2,16 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-Product Category Create/Update
+Add/Update Product Category
 {% endblock %}
 
 {% block content %}
-<h1>ProductCategory Create/Update</h1>
+<h2>Product Category</h2>
 
 <form  method="post">
 {% csrf_token %}
 {{ form|crispy }}
 <input  type="submit" class="btn btn-success" value="Submit"  />
 </form>
+<br />
 {% endblock %}
