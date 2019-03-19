@@ -5,7 +5,8 @@ from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import ProductCategory, ProductSubCategory, Product, ProductReview
-from .forms import ProductReviewCreateForm, ProductCreateForm, ProductUpdateForm
+from .forms import ProductReviewCreateForm, ProductCreateForm, \
+    ProductUpdateForm, ProductCategoryCreateForm, ProductCategoryUpdateForm
 from django.http import HttpResponseRedirect
 import datetime
 
@@ -19,13 +20,28 @@ class ProductCategoryDetail(DetailView):
 
 
 class ProductCategoryCreate(CreateView):
-    model = ProductCategory
-    fields = '__all__'
+    template_name = 'products/productcategory_form.html'
+    form_class = ProductCategoryCreateForm
+
+    def form_valid(self, form):
+        form.instance.created_on = datetime.datetime.now()
+        form.instance.created_user_id = self.request.user.id
+        product_category = form.save()
+        product_category.save()
+        return HttpResponseRedirect(product_category.get_absolute_url())
 
 
 class ProductCategoryUpdate(UpdateView):
     model = ProductCategory
-    fields = '__all__'
+    template_name = 'products/productcategory_form.html'
+    form_class = ProductCategoryUpdateForm
+
+    def form_valid(self, form):
+        product_category = form.save()
+        product_category.modified_on = datetime.datetime.now()
+        product_category.modified_user_id = self.request.user.id
+        product_category.save()
+        return HttpResponseRedirect(product_category.get_absolute_url())
 
 
 class ProductCategoryDelete(DeleteView):
@@ -91,8 +107,6 @@ class ProductUpdate(UpdateView):
         product.modified_on = datetime.datetime.now()
         product.modified_user_id = self.request.user.id
         product.save()
-
-        print(product)
         return HttpResponseRedirect(product.get_absolute_url())
 
 
