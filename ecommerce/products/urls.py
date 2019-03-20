@@ -19,8 +19,9 @@ urlpatterns = [
     url(r'productsubcategories/$', views.ProductSubCategoryList.as_view(), name='productsubcategory_list'),
     url(r'productsubcategory/(?P<pk>[0-9]+)/$', views.ProductSubCategoryDetail.as_view(),
         name='productsubcategory_detail'),
-    url(r'productsubcategory_create/$', views.ProductSubCategoryCreate.as_view(), name='productsubcategory_create'),
-    url(r'productsubcategory_update/(?P<pk>[0-9]+)/$', views.ProductSubCategoryUpdate.as_view(),
+    url(r'productsubcategory_create/$', login_required(views.ProductSubCategoryCreate.as_view()),
+        name='productsubcategory_create'),
+    url(r'productsubcategory_update/(?P<pk>[0-9]+)/$', login_required(views.ProductSubCategoryUpdate.as_view()),
         name='productsubcategory_update'),
     url(r'productsubcategory_delete/(?P<pk>[0-9]+)/$', views.ProductSubCategoryDelete.as_view(
         success_url='/products/productsubcategories/'), name='productsubcategory_delete'),

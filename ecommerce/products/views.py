@@ -6,7 +6,8 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import ProductCategory, ProductSubCategory, Product, ProductReview
 from .forms import ProductReviewCreateForm, ProductCreateForm, \
-    ProductUpdateForm, ProductCategoryCreateForm, ProductCategoryUpdateForm
+    ProductUpdateForm, ProductCategoryCreateForm, ProductCategoryUpdateForm, \
+    ProductSubCategoryCreateForm, ProductSubCategoryUpdateForm
 from django.http import HttpResponseRedirect
 import datetime
 
@@ -64,13 +65,28 @@ class ProductSubCategoryDetail(DetailView):
 
 
 class ProductSubCategoryCreate(CreateView):
-    model = ProductSubCategory
-    fields = '__all__'
+    template_name = 'products/productsubcategory_form.html'
+    form_class = ProductSubCategoryCreateForm
+
+    def form_valid(self, form):
+        form.instance.created_on = datetime.datetime.now()
+        form.instance.created_user_id = self.request.user.id
+        product_sub_category = form.save()
+        product_sub_category.save()
+        return HttpResponseRedirect(product_sub_category.get_absolute_url())
 
 
 class ProductSubCategoryUpdate(UpdateView):
     model = ProductSubCategory
-    fields = '__all__'
+    template_name = 'products/productsubcategory_form.html'
+    form_class = ProductSubCategoryUpdateForm
+
+    def form_valid(self, form):
+        product_sub_category = form.save()
+        product_sub_category.modified_on = datetime.datetime.now()
+        product_sub_category.modified_user_id = self.request.user.id
+        product_sub_category.save()
+        return HttpResponseRedirect(product_sub_category.get_absolute_url())
 
 
 class ProductSubCategoryDelete(DeleteView):
