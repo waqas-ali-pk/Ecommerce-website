@@ -11,20 +11,21 @@
 
 {% for product in allProducts %}
 
-        <div class="col-md-6 col-lg-4">
-                        <div class="card mb-4">
-    <div class="card-body">
+        <div class="col-md-4 col-lg-3">
+                        <div class="card mb-3">
+
+                            {% if product.product_image %}
+            <img class="card-img-top" src="{{product.product_image.url}}">
+{% endif %}
+
+                            <div class="card-body">
 
 <h4 class="card-title">{{ product.product_name }}</h4>
-        <p>
-            {% if product.product_image %}
-            <img src="{{product.product_image.url}}" width="240"></p>
-{% endif %}
-        </p>
 
-<span class="badge badge-primary">${{ product.s_price }}</span>
-        <p class="card-text">{{ product.product_description }}</p>
-<a href="{% url 'buy_product_detail' product_id=product.product_id %}" class="btn btn-primary">More</a>
+        <p class="card-text">${{ product.s_price }}
+            <!--{{ product.product_description }}-->
+        </p>
+<a href="{% url 'buy_product_detail' product_id=product.product_id %}" class="btn btn-dark btn-block">More</a>
             </div>
 
                             </div>

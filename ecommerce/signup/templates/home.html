@@ -5,7 +5,7 @@ ecommerce home page
 {% endblock %}
 
 {% block content %}
-<h2>Welcome, {{ user.username }}!</h2>
+<!--<h2>Welcome, {{ user.username }}!</h2>-->
 
 <div class="container">
 
@@ -19,20 +19,31 @@ ecommerce home page
 
             <!--<div class="portfolio-item d-block mx-auto">-->
 
-            <div class="card mb-4">
-    <div class="card-body">
+            <div class="card mb-3">
 
-
-        <p>
-            {% if product.product_image %}
-            <img src="{{product.product_image.url}}" width="210"></p>
+                {% if product.product_image %}
+            <img class="card-img-top" src="{{product.product_image.url}}" />
 {% endif %}
+
+                <div class="card-body">
+
+
+
+
+ <h4 class="card-title">{{ product.product_name }}</h4>
+        <!--<p class="card-text"><span class="badge badge-primary">${{ product.s_price }}</span> <br />-->
+                            <p class="card-text">${{ product.s_price }}
+                                <!--<br />-->
+
+            <!--{{ product.product_description }}-->
         </p>
-        <h4 class="card-title">{{ product.product_name }}</h4>
-<p><span class="badge badge-primary">${{ product.s_price }}</span></p>
-        <!--<p class="card-text">{{ product.product_description }}</p>-->
-<a href="{% url 'buy_product_detail' product_id=product.product_id %}" class="btn btn-primary float-right">More</a>
+<a href="{% url 'buy_product_detail' product_id=product.product_id %}" class="btn btn-dark btn-block">More</a>
             </div>
+
+                <!--<div class="card-footer text-center text-muted">-->
+<!--{{ product.created_on }}-->
+                <!--</div>-->
+
                 </div>
 
 <!--</div>-->
