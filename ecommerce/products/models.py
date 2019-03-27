@@ -108,7 +108,7 @@ class Cart(models.Model):
         verbose_name_plural = _('carts')
         ordering = ('-creation_date',)
 
-    def __unicode__(self):
+    def __str__(self):
         return str(self.creation_date)
 
 
@@ -135,7 +135,7 @@ class Item(models.Model):
         verbose_name_plural = _('items')
         ordering = ('cart',)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%d units of %s' % (self.quantity, self.product.__class__.__name__)
 
     def total_price(self):

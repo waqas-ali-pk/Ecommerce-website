@@ -10,6 +10,7 @@ from .forms import ProductReviewCreateForm, ProductCreateForm, \
     ProductSubCategoryCreateForm, ProductSubCategoryUpdateForm
 from django.http import HttpResponseRedirect
 import datetime
+from .models import Product, Cart
 
 
 class ProductCategoryList(ListView):
@@ -164,3 +165,19 @@ class ProductReviewCreate(CreateView):
     #         review.save()
     #         return HttpResponseRedirect(reverse_lazy('buy_product_detail', args=[review.product_id.product_id]))
     #     return render(request, 'products/add_product_review.html', {'form': form})
+
+
+def add_to_cart(request, product_id, quantity):
+    product = Product.objects.get(id=product_id)
+    cart = Cart(request)
+    cart.add(product, product.unit_price, quantity)
+
+
+def remove_from_cart(request, product_id):
+    product = Product.objects.get(id=product_id)
+    cart = Cart(request)
+    cart.remove(product)
+
+
+def get_cart(request):
+    return render(request, 'cart.html', {'cart': Cart(request)})

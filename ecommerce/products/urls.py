@@ -41,4 +41,5 @@ urlpatterns = [
     url(r'productreview_create/(?P<product_id>[0-9]+)/$', login_required(views.ProductReviewCreate.as_view()),
         name='productreview_create'),
 
+    url(r'get_cart', views.get_cart, name='get_cart')
 ]
